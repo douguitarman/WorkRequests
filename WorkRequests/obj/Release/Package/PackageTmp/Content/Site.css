@@ -1,0 +1,86 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+span.field-validation-error.text-danger {
+    padding-top: 5px;
+    display: block;
+}
+@media only screen and (max-width: 1200px) {
+	
+	/* Force table to not be like tables anymore */
+	#responsive-tables table,
+    #responsive-tables2 table, 
+	#responsive-tables thead,
+    #responsive-tables2 thead,  
+	#responsive-tables tbody, 
+    #responsive-tables2 tbody, 
+	#responsive-tables th, 
+    #responsive-tables2 th, 
+	#responsive-tables td, 
+    #responsive-tables2 td, 
+	#responsive-tables tr,
+    #responsive-tables2 tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#responsive-tables thead tr,
+    #responsive-tables2 thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+	#responsive-tables tr, #responsive-tables2 tr { border: 1px solid #ccc; }
+ 
+	#responsive-tables td,
+    #responsive-tables2 td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+		white-space: normal;
+		text-align:left;
+	}
+ 
+	#responsive-tables td:before,
+    #responsive-tables2 td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+ 
+	/*
+	Label the data
+	*/
+	#responsive-tables td:before, #responsive-tables2 td:before { content: attr(data-title); }
+}

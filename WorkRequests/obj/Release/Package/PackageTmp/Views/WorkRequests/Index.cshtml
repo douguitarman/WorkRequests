@@ -1,0 +1,124 @@
+﻿@*@model IEnumerable<WorkRequests.Models.WorkRequestViewModel>*@
+@model WorkRequests.Models.WorkRequestViewModel
+@using Microsoft.AspNet.Identity
+@using WorkRequests.Extensions
+
+@{
+    ViewBag.Title = "All Work Requests";
+    bool isAdminRole = User.IsInRole("Admin");
+    bool isUserRole = User.IsInRole("User");
+}
+
+<h2>All Work Requests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<h4 class="text-success">@TempData["Message"]</h4>
+<div id="responsive-tables">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkRequestTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkRequestDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueReportedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueReportedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriorityName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestTypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastUpdateBy)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.GetAllWorkRequests)
+            {
+                <tr>
+                    <td data-title="Title">
+                        @Html.DisplayFor(modelItem => item.WorkRequestTitle)
+                    </td>
+                    <td data-title="Description">
+                        @Html.DisplayFor(modelItem => item.WorkRequestDescription)
+                    </td>
+                    <td data-title="Issue Reported By">
+                        @Html.DisplayFor(modelItem => item.IssueReportedBy)
+                    </td>
+                    <td data-title="Issue Reported Date">
+                        @Html.DisplayFor(modelItem => item.IssueReportedDate)
+                    </td>
+                    <td data-title="Department">
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+                    <td data-title="Status">
+                        @Html.DisplayFor(modelItem => item.StatusName)
+                    </td>
+                    <td data-title="Priority">
+                        @Html.DisplayFor(modelItem => item.PriorityName)
+                    </td>
+                    <td data-title="Request Type">
+                        @Html.DisplayFor(modelItem => item.RequestTypeName)
+                    </td>
+                    <td data-title="Due Date">
+                        @item.DueDate.Date.ToString("MM/dd/yyyy")
+                    </td>
+                    <td data-title="Created By">
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td data-title="Last Update By">
+                        @if (item.LastUpdateBy != "")
+                        {
+                            @Html.DisplayFor(modelItem => item.LastUpdateBy)
+                        }
+                        else
+                        {
+                            <text> &nbsp; </text>
+                        }
+                    </td>
+                    <td data-title="Action">
+                        @if (isAdminRole)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.WorkRequestId }) <text> | </text>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.WorkRequestId })
+                        }
+                        else if (isUserRole && item.StatusId == 1 && item.CreatedBy == User.Identity.GetFullName())
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.WorkRequestId }) <text> | </text>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.WorkRequestId })
+                        }
+                        else
+                        {
+                            <text> &nbsp; </text>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

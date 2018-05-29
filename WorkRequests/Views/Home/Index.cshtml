@@ -1,0 +1,121 @@
+﻿@model WorkRequests.Models.WorkRequestViewModel
+@using Microsoft.AspNet.Identity
+@using WorkRequests.Extensions
+@{
+    ViewBag.Title = "Home Page";
+    bool isAdminRole = User.IsInRole("Admin");
+    bool isUserRole = User.IsInRole("User");
+}
+
+<div class="jumbotron">
+    <h1>O2</h1>
+    <p class="lead">Work Request system</p>
+    <p>@Html.ActionLink("Demo instructions", "About", null, new { @class = "openInModal", @data_modal_size = "modal-lg", @data_modal_heading = "About this application" })</p>
+</div>
+
+<div class="row">
+    @if (Request.IsAuthenticated)
+    { 
+    <div class="col-md-6">
+        <h2>My Work Requests</h2>
+        <div id="responsive-tables">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WorkRequestTitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StatusName)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GetAllWorkRequests)
+                    {
+                        if ((isAdminRole || isUserRole) && item.CreatedBy == User.Identity.GetFullName())
+                        {
+                            <tr>
+                                <td data-title="Title">
+                                    @Html.ActionLink(item.WorkRequestTitle, "Details", "WorkRequests", new { id = item.WorkRequestId }, null)
+                                </td>
+                                <td data-title="Status">
+                                    @Html.DisplayFor(modelItem => item.StatusName)
+                                </td>
+                                <td data-title="Action">
+                                    @if (isAdminRole)
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", "WorkRequests", new { id = item.WorkRequestId }, null) <text> | </text>
+                                        @Html.ActionLink("Delete", "Delete", "WorkRequests", new { id = item.WorkRequestId }, null)
+                                    }
+                                    else if (isUserRole && item.StatusId == 1 && item.CreatedBy == User.Identity.GetFullName())
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", "WorkRequests", new { id = item.WorkRequestId }, null) <text> | </text>
+                                        @Html.ActionLink("Delete", "Delete", "WorkRequests", new { id = item.WorkRequestId }, null)
+                                    }
+                                    else
+                                    {
+                                        <text> &nbsp; </text>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>All Open Work Requests</h2>
+        <div id="responsive-tables2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WorkRequestTitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StatusName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GetAllWorkRequests.Where(s => s.StatusId == 1 || s.StatusId == 2))
+                    {
+                        <tr>
+                            <td data-title="Title">
+                                @Html.ActionLink(item.WorkRequestTitle, "Details", "WorkRequests", new { id = item.WorkRequestId }, null)
+                            </td>
+                            <td data-title="Status">
+                                @Html.DisplayFor(modelItem => item.StatusName)
+                            </td>
+                            <td data-title="Created By">
+                                @Html.DisplayFor(modelItem => item.CreatedBy)
+                            </td>
+                            <td data-title="Action">
+                                @if (isAdminRole)
+                                {
+                                    @Html.ActionLink("Edit", "Edit", "WorkRequests", new { id = item.WorkRequestId }, null) <text> | </text>
+                                    @Html.ActionLink("Delete", "Delete", "WorkRequests", new { id = item.WorkRequestId }, null)
+                                }
+                                else if (isUserRole && item.StatusId == 1 && item.CreatedBy == User.Identity.GetFullName())
+                                {
+                                    @Html.ActionLink("Edit", "Edit", "WorkRequests", new { id = item.WorkRequestId }, null) <text> | </text>
+                                    @Html.ActionLink("Delete", "Delete", "WorkRequests", new { id = item.WorkRequestId }, null)
+                                }
+                                else
+                                {
+                                    <text> &nbsp; </text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+</div>

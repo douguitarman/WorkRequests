@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Work Requests</title>
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("O2 Work Requests", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Register a New User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Work Requests <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("View Work Requests", "Index", "WorkRequests")</li>
+                                <li>@Html.ActionLink("Add Work Request", "Create", "WorkRequests")</li>
+                            </ul>
+                        </li>
+                    }
+                    
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Work Requests</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+    <script src="~/Scripts/Site.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            // Date/Time picker
+            $('#datetimepicker, #datetimepicker1').datetimepicker();
+
+            // Modal
+            $('.openInModal').on('click', function (e) {
+                e.preventDefault();
+                
+                let isPdf = $(this).data('pdf') != undefined ? true : false;
+
+                popGenModal({
+                    target: 'GenModal',
+                    url: $(this).attr("href"),
+                    size: $(this).data('modal-size'),
+                    heading: $(this).data('modal-heading'),
+                    isPdf: isPdf
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>

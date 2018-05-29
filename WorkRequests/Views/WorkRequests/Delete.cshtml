@@ -1,0 +1,111 @@
+﻿@model WorkRequests.Models.WorkRequestViewModel
+
+@{
+    ViewBag.Title = "Delete Work Request";
+}
+
+<h2>Delete Work Request</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkRequestTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkRequestTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkRequestDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkRequestDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueReportedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueReportedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueReportedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueReportedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriorityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriorityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdateBy)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "WorkRequests", new { id = Model.WorkRequestId }, FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color text-center">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

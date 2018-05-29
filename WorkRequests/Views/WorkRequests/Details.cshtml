@@ -1,0 +1,118 @@
+﻿@model WorkRequests.Models.WorkRequestViewModel
+@using Microsoft.AspNet.Identity
+@using WorkRequests.Extensions
+
+@{
+    ViewBag.Title = "Details";
+    bool isAdminRole = User.IsInRole("Admin");
+    bool isUserRole = User.IsInRole("User");
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkRequestTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkRequestTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkRequestDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkRequestDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueReportedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueReportedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueReportedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueReportedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriorityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriorityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdateBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @if (isAdminRole)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.WorkRequestId }) <text> | </text>
+    }
+    else if (isUserRole && Model.StatusId == 1 && Model.CreatedBy == User.Identity.GetFullName())
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.WorkRequestId }) <text> | </text>
+    }
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>
