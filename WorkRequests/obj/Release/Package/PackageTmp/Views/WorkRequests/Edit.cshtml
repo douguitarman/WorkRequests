@@ -33,7 +33,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.IssueReportedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 read-only">
                 @Html.DisplayFor(model => model.IssueReportedBy)
                 @Html.HiddenFor(model => model.IssueReportedBy)
             </div>
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.IssueReportedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 read-only">
                 @Html.DisplayFor(model => model.IssueReportedDate)
                 @Html.HiddenFor(model => model.IssueReportedDate)
             </div>
@@ -90,14 +90,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DueDate, new { @class = "form-control", @id = "date", @name = "date", @placeholder = "MM/DD/YYY" })
+                @Html.TextBoxFor(model => model.DueDate, new { @class = "form-control", @id = "datetimepicker1" })
                 @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 read-only">
                 @Html.DisplayFor(model => model.CreatedBy)
             </div>
         </div>

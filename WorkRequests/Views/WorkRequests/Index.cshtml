@@ -16,7 +16,7 @@
 </p>
 <h4 class="text-success">@TempData["Message"]</h4>
 <div id="responsive-tables">
-    <table class="table">
+    <table class="table table-striped table-index">
         <thead>
             <tr>
                 <th>
@@ -31,27 +31,27 @@
                 <th>
                     @Html.DisplayNameFor(model => model.IssueReportedDate)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.DepartmentName)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.StatusName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.PriorityName)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.RequestTypeName)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.DueDate)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.CreatedBy)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.LastUpdateBy)
-                </th>
+                </th>*@
                 <th>Action</th>
             </tr>
         </thead>
@@ -60,38 +60,38 @@
             @foreach (var item in Model.GetAllWorkRequests)
             {
                 <tr>
-                    <td data-title="Title">
+                    <td class="cell1" data-title="Title">
                         @Html.DisplayFor(modelItem => item.WorkRequestTitle)
                     </td>
-                    <td data-title="Description">
+                    <td class="cell2" data-title="Description">
                         @Html.DisplayFor(modelItem => item.WorkRequestDescription)
                     </td>
-                    <td data-title="Issue Reported By">
+                    <td class="cell3" data-title="Issue Reported By">
                         @Html.DisplayFor(modelItem => item.IssueReportedBy)
                     </td>
-                    <td data-title="Issue Reported Date">
+                    <td class="cell4" data-title="Issue Reported Date">
                         @Html.DisplayFor(modelItem => item.IssueReportedDate)
                     </td>
-                    <td data-title="Department">
+                    @*<td class="cell5" data-title="Department">
                         @Html.DisplayFor(modelItem => item.DepartmentName)
-                    </td>
-                    <td data-title="Status">
+                    </td>*@
+                    <td class="cell6" data-title="Status">
                         @Html.DisplayFor(modelItem => item.StatusName)
                     </td>
-                    <td data-title="Priority">
+                    <td class="cell7" data-title="Priority">
                         @Html.DisplayFor(modelItem => item.PriorityName)
                     </td>
-                    <td data-title="Request Type">
+                    @*<td class="cell8" data-title="Request Type">
                         @Html.DisplayFor(modelItem => item.RequestTypeName)
-                    </td>
-                    <td data-title="Due Date">
+                    </td>*@
+                    <td class="cell9" data-title="Due Date">
                         @item.DueDate.Date.ToString("MM/dd/yyyy")
                     </td>
-                    <td data-title="Created By">
+                    @*<td class="cell10" data-title="Created By">
                         @Html.DisplayFor(modelItem => item.CreatedBy)
                     </td>
-                    <td data-title="Last Update By">
-                        @if (item.LastUpdateBy != "")
+                    <td class="cell11" data-title="Last Update By">
+                        @if (item.LastUpdateBy != null)
                         {
                             @Html.DisplayFor(modelItem => item.LastUpdateBy)
                         }
@@ -99,8 +99,8 @@
                         {
                             <text> &nbsp; </text>
                         }
-                    </td>
-                    <td data-title="Action">
+                    </td>*@
+                    <td class="cell12" data-title="Action">
                         @if (isAdminRole)
                         {
                             @Html.ActionLink("Edit", "Edit", new { id = item.WorkRequestId }) <text> | </text>

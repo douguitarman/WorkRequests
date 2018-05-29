@@ -26,6 +26,39 @@ span.field-validation-error.text-danger {
     padding-top: 5px;
     display: block;
 }
+.read-only {
+    padding-top: 6px;
+}
+
+.dl-horizontal dd {
+    padding: 0 0 5px 0;
+}
+.dl-horizontal dt {
+    padding: 5px 0 0 0;
+}
+
+@media (min-width: 768px) {
+    .dl-horizontal dd {
+        padding: 5px 0;
+    }
+    .dl-horizontal dt {
+        padding: 5px 0;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .cell1, .cell3, .cell4, .cell12 {
+        width: 15%;
+    }
+
+    .cell2 {
+        width: 20%;
+    }
+
+    .cell6, .cell7, .cell9 {
+        width: 8%;
+    }
+}
 @media only screen and (max-width: 1200px) {
 	
 	/* Force table to not be like tables anymore */
