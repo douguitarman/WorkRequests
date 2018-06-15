@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using WorkRequests.BO;
@@ -64,6 +65,46 @@ namespace WorkRequests.DAL
 
                 return result;
             }
+        }
+
+        public string AddReceipt(Receipt model)
+        {
+
+            using (SqlCommand cmd = new SqlCommand("AddReceipt", connection))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ReceiptImageName", model.ReceiptImageName);
+                cmd.Parameters.AddWithValue("@ReceiptImage", model.ReceiptImage.InputStream);
+
+                connection.Open();
+
+                string result = cmd.ExecuteNonQuery().ToString();
+
+                return result;
+            }
+        }
+
+        public List<Receipt> GetReceipts()
+        {
+            List<Receipt> receipts = new List<Receipt>();
+
+            using (var DataWrapper = new DataWrapper())
+            {
+                var reader = DataWrapper.Query("GetReceipts");
+
+                while (reader.Read())
+                {
+                    receipts.Add(
+                        new Receipt()
+                        {
+                            ReceiptId = GetIntValue(reader, "ReceiptId"),
+                            ReceiptImageName = GetStringValue(reader, "ReceiptImageName"),
+                            DisplayReceipt = (Byte[])reader["ReceiptImage"]
+                        });
+                }
+            }
+           
+            return receipts;
         }
 
         /// <summary>

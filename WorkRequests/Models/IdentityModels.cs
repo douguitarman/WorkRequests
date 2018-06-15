@@ -41,5 +41,7 @@ namespace WorkRequests.Models
         public System.Data.Entity.DbSet<WorkRequests.Models.WorkRequestViewModel> WorkRequestViewModels { get; set; }
 
         public System.Data.Entity.DbSet<WorkRequests.BO.WorkRequest> WorkRequests { get; set; }
+
+        public System.Data.Entity.DbSet<WorkRequests.Models.Receipt> Receipts { get; set; }
     }
 }
