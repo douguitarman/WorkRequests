@@ -1,0 +1,28 @@
+﻿@model WorkRequests.Models.Receipt
+@{
+    ViewBag.Title = "GetReceipt";
+}
+
+<h2>GetReceipt</h2>
+
+<div>
+@foreach (var item in Model.GetReceipts)
+{
+    
+    var imagetype = "jpeg";
+    
+    String img64 = Convert.ToBase64String(item.DisplayReceipt);
+    //String img64Url = string.Format("data:image/" + item.imagetype + ";base64,{0}", img64); //imagetype can be e.g. gif, jpeg, png etc.
+    String img64Url = string.Format("data:image/" + imagetype + ";base64,{0}", img64); //imagetype can be e.g. gif, jpeg, png etc.       
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(modelItem => item.ReceiptImageName)
+        </dt>
+
+        <dd>
+            <img src="@img64Url" />
+        </dd>
+    </dl>
+}
+</div>

@@ -50,5 +50,6 @@ C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\bi
 C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\obj\Debug\WorkRequests.csprojResolveAssemblyReference.cache
 C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\obj\Debug\WorkRequests.dll
 C:\Users\dallan\Documents\Visual Studio 2013\Projects\OrigamiOwl\WorkRequests\obj\Debug\WorkRequests.pdb
